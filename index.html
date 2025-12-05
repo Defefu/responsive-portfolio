@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degefu Dawit | Web Developer</title>
+    <!-- ===== CSS files ===== -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/skins/color-1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ===== Style switcher ===== -->
+    <link rel="stylesheet" href="css/skins/color-1.css" class="alternate-style" title="color-1" disabled>
+    <link rel="stylesheet" href="css/skins/color-2.css" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="css/skins/color-3.css" class="alternate-style" title="color-3" disabled>
+    <link rel="stylesheet" href="css/skins/color-4.css" class="alternate-style" title="color-4" disabled>
+    <link rel="stylesheet" href="css/skins/color-5.css" class="alternate-style" title="color-5" disabled>
+    <link rel="stylesheet" href="css/style-switcher.css">
+
+    <!-- ===== FIXED MOBILE RESPONSIVE CSS ===== -->
+    <style>
+        /* Fix for mobile hamburger menu visibility */
+        
+        .nav-toggler {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--skin-color);
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-toggler:hover {
+            background: var(--skin-color);
+            opacity: 0.9;
+        }
+        
+        .nav-toggler span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: white;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        /* Hamburger to X animation */
+        
+        .nav-toggler.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .nav-toggler.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .nav-toggler.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        /* Mobile responsive styles */
+        
+        @media (max-width: 1199px) {
+            /* Hide the original nav-toggler in aside */
+            .aside .nav-toggler {
+                display: none !important;
+            }
+            /* Show our fixed nav-toggler */
+            .nav-toggler {
+                display: flex !important;
+            }
+            /* Fix aside positioning */
+            .aside {
+                position: fixed;
+                left: -300px;
+                transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                width: 300px;
+                z-index: 1001;
+                height: 100vh;
+                overflow-y: auto;
+                box-shadow: none;
+            }
+            .aside.active {
+                left: 0;
+                box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+            }
+            /* Main content adjustment */
+            .main-content {
+                padding-left: 0 !important;
+                transition: all 0.4s ease;
+                width: 100%;
+            }
+            /* Menu overlay */
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 1000;
+                backdrop-filter: blur(3px);
+            }
+            .menu-overlay.active {
+                display: block;
+            }
+            /* Fix body overflow when menu is open */
+            body.menu-open {
+                overflow: hidden;
+            }
+            /* Adjust section padding for mobile */
+            .section {
+                padding: 40px 15px !important;
+            }
+            /* Fix home image display on mobile */
+            .home .home-img {
+                display: block !important;
+                text-align: center;
+                margin-top: 30px;
+            }
+            .home .home-img img {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                border-radius: 10px;
+                margin: 0 auto;
+                display: block;
+            }
+            /* Home section mobile optimization */
+            .home .home-info,
+            .home .home-img {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+                text-align: center;
+            }
+            /* About section adjustments */
+            .personal-info .info-item {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+            }
+            /* Service and portfolio items */
+            .service-item,
+            .portfolio-item {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+            }
+            /* Timeline columns */
+            .education,
+            .exprience {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+                margin-bottom: 40px;
+            }
+            /* Contact info items */
+            .contact-info-item {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+                margin: 15px 0;
+            }
+            /* Form items */
+            .form-item.col-6 {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+            }
+            /* Reduce section title font size */
+            .section-title h2 {
+                font-size: 28px;
+                text-align: center;
+            }
+            /* Fix typing text size */
+            .typing {
+                font-size: 1.5rem;
+            }
+            /* Fix button sizing */
+            .btn {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+        /* Tablet specific styles */
+        
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .service-item,
+            .portfolio-item {
+                flex: 0 0 50% !important;
+                max-width: 50% !important;
+            }
+            .personal-info .info-item {
+                flex: 0 0 50% !important;
+                max-width: 50% !important;
+            }
+            .contact-info-item {
+                flex: 0 0 calc(50% - 30px) !important;
+                max-width: calc(50% - 30px) !important;
+            }
+            .home .home-img img {
+                max-width: 400px;
+            }
+        }
+        /* Small mobile adjustments */
+        
+        @media (max-width: 767px) {
+            .nav-toggler {
+                width: 45px;
+                height: 45px;
+                top: 15px;
+                left: 15px;
+            }
+            .aside {
+                width: 85%;
+                max-width: 280px;
+            }
+            .home .home-info p {
+                font-size: 16px;
+                line-height: 1.6;
+                text-align: justify;
+            }
+            /* Contact form padding */
+            #contactForm {
+                padding: 20px !important;
+            }
+            .section-title h2 {
+                font-size: 24px;
+            }
+            .typing {
+                font-size: 1.3rem;
+            }
+        }
+        /* Desktop styles */
+        
+        @media (min-width: 1200px) {
+            .nav-toggler {
+                display: none !important;
+            }
+            .aside {
+                left: 0 !important;
+            }
+            .main-content {
+                padding-left: 270px !important;
+            }
+        }
+        /* Back to top button */
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--skin-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--skin-color);
+            transform: translateY(-3px);
+        }
+        /* Smooth scroll */
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Fix image loading */
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* Ensure all images are responsive */
+        
+        .home-img img,
+        .portfolio-img img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        /* Fix mobile menu z-index */
+        
+        @media (max-width: 1199px) {
+            .aside {
+                z-index: 1001;
+            }
+            .nav-toggler {
+                z-index: 1002;
+            }
+            .menu-overlay {
+                z-index: 1000;
+            }
+            /* Fix section positioning */
+            .section {
+                scroll-margin-top: 80px;
+            }
+            #home {
+                scroll-margin-top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== Menu Overlay ===== -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- ===== Fixed Hamburger Menu ===== -->
+    <div class="nav-toggler" id="navToggler">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- ===== Main Container Start ===== -->
+    <div class="main-container">
+        <!-- ===== Aside Start ===== -->
+        <div class="aside">
+            <div class="logo">
+                <a href="#"><span>D</span>egefu</a>
+            </div>
+            <!-- Remove the nav-toggler from inside aside -->
+            <ul class="nav">
+                <li><a href="#home" class="active"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="#about"><i class="fa fa-user"></i>About</a></li>
+                <li><a href="#service"><i class="fa fa-list"></i>Service</a></li>
+                <li><a href="#portfolio"><i class="fa fa-briefcase"></i>Portfolio</a></li>
+                <li><a href="#contact"><i class="fa fa-comments"></i>Contact</a></li>
+            </ul>
+        </div>
+        <!-- ===== Aside End ===== -->
+
+        <!-- ===== Main Content Start ===== -->
+        <div class="main-content">
+            <!-- ===== Home Section Start ===== -->
+            <section class="home section" id="home">
+                <div class="Container">
+                    <div class="row">
+                        <div class="home-info padd-15">
+                            <h3 class="hello">Hello, my name is <span class="name">Degefu Dawit</span></h3>
+                            <h3 class="my-profession">I' m a <span class="typing">Web Designer</span></h3>
+                            <p>I'm - A web programmer writes the code that powers websites, making them interactive and functional using languages like HTML, CSS, and JavaScript. - A web designer focuses on the visual layout and user experience of a website,
+                                using design tools and principles to make it attractive and easy to use. - Computer graphics is the field of creating images, animations, and visual effects using computers, often used in games, movies, and digital design.
+                            </p>
+                            <a href="#contact" class="btn hire-me">Hire Me</a>
+                        </div>
+                        <div class="home-img padd-15">
+                            <img src="images/home-image.jpg" alt="Degefu Dawit" onerror="this.src='https://via.placeholder.com/400x500/ec1839/ffffff?text=Degefu+Dawit'">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== About Section Start ===== -->
+            <section class="about section" id="about">
+                <div class="Container">
+                    <div class="row">
+                        <div class="section-title padd-15">
+                            <h2>About Me</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="about-content padd-15">
+                            <div class="row">
+                                <div class="about-text padd-15">
+                                    <h3>I'm Degefu Dawit <br><span>Web Developer</span></h3>
+                                    <p>I'm a passionate and curious student exploring the world of web development, design, and computer graphics. I enjoy turning ideas into interactive websites using HTML, CSS, and JavaScript, and I love designing clean,
+                                        user-friendly interfaces that make digital experiences enjoyable. Whether it's coding a dynamic feature, crafting a responsive layout, or experimenting with visual effects, I'm always eager to learn and grow. My
+                                        goal is to become a skilled full-stack developer and contribute to building innovative, accessible, and impactful web applications.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="personal-info padd-15">
+                                    <div class="row">
+                                        <div class="info-item padd-15">
+                                            <p>Birthday : <span>18 sep 1995</span></p>
+                                        </div>
+                                        <div class="info-item padd-15">
+                                            <p>Age : <span>23</span></p>
+                                        </div>
+                                        <div class="info-item padd-15">
+                                            <p>Website : <span>www.domain.com</span></p>
+                                        </div>
+                                        <div class="info-item padd-15">
+                                            <p>Email : <span>degefudawit375@gmail.com</span></p>
+                                        </div>
+                                        <div class="info-item padd-15">
+                                            <p>Degree : <span>Bachelor of Science in Computer Science</span></p>
+                                        </div>
+                                        <div class="info-item padd-15">
+                                            <p>Phone : <span>0954053224</span></p>
+                                        </div>
+                                        <div class="info-item padd-15">
+                                            <p>City : <span>hawassa</span></p>
+                                        </div>
+                                        <div class="info-item padd-15">
+                                            <p>FreeInace : <span>Available</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="button padd-15">
+                                            <a href="#" class="btn">Download CV</a>
+                                            <a href="#contact" class="btn hire-me">Hire Me</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill padd-15">
+                                    <div class="row">
+                                        <div class="skill-item padd-15">
+                                            <h5>CS</h5>
+                                            <div class="progress">
+                                                <div class="progress-in" style="width: 76%;"></div>
+                                                <div class="skill-precent">86%</div>
+                                            </div>
+                                        </div>
+                                        <div class="skill-item padd-15">
+                                            <h5>JS</h5>
+                                            <div class="progress">
+                                                <div class="progress-in" style="width: 86%;"></div>
+                                                <div class="skill-precent">80%</div>
+                                            </div>
+                                        </div>
+                                        <div class="skill-item padd-15">
+                                            <h5>PHP</h5>
+                                            <div class="progress">
+                                                <div class="progress-in" style="width: 96%;"></div>
+                                                <div class="skill-precent">82%</div>
+                                            </div>
+                                        </div>
+                                        <div class="skill-item padd-15">
+                                            <h5>HTML</h5>
+                                            <div class="progress">
+                                                <div class="progress-in" style="width: 80%;"></div>
+                                                <div class="skill-precent">90%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="education padd-15">
+                                    <h3 class="title">Education</h3>
+                                    <div class="row">
+                                        <div class="timeline-box padd-15">
+                                            <div class="timeline shadow-dark">
+                                                <!-- Current – Year 3 (Level III) -->
+                                                <div class="timeline-item">
+                                                    <div class="circle-dot"></div>
+                                                    <h3 class="timeline-date">
+                                                        <i class="fa fa-calendar"></i> 2022 – Present
+                                                    </h3>
+                                                    <h4 class="timeline-title">BSc in Computer Science – Year III (Level III)</h4>
+                                                    <p class="timeline-text">
+                                                        Wachemo University • Main Campuse, Ethiopia<br>
+                                                        <strong>3rd Year Student</strong> | Expected Graduation: March 2026<br> Current CGPA: above 3...<br><br>
+                                                        <strong>Completed Courses (Year 1 & 2):</strong><br> • Fundamentals of Programming (C++)<br> • Object-Oriented Programming (Java)<br> • Data Structures & Algorithms<br> • Discrete Mathematics & Logic<br>•
+                                                        Computer Organization & Architecture<br> • Database Management Systems<br> • Web Programming (HTML, CSS, JS, PHP)<br> • Operating Systems<br> • Software Engineering<br> • Computer Networks<br><br>
+                                                        <strong>Current Courses (Year 3 – 2025):</strong><br> • Compiler Design<br> • Web Programming<br> • Wireless Communication<br> • Computer Graphics & Mobile computing<br> • Data Analysis and Algorithms<br>
+                                                    </p>
+                                                </div>
+                                                <!-- Preparatory -->
+                                                <div class="timeline-item">
+                                                    <div class="circle-dot"></div>
+                                                    <h3 class="timeline-date">
+                                                        <i class="fa fa-calendar"></i> 2020 – 2022
+                                                    </h3>
+                                                    <h4 class="timeline-title">Preparatory (Grade 11-12)</h4>
+                                                    <p class="timeline-text">
+                                                        Arbegona Amanuel School • Natural Science Stream<br> EUEE Score: above 500 → Placed in Computer Science at Wachemo University
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="exprience padd-15">
+                                    <h3 class="title">Experience</h3>
+                                    <div class="row">
+                                        <div class="timeline-box padd-15">
+                                            <div class="timeline shadow-dark">
+                                                <!-- Current Freelance & Projects -->
+                                                <div class="timeline-item">
+                                                    <div class="circle-dot"></div>
+                                                    <h3 class="timeline-date">
+                                                        <i class="fa fa-calendar"></i> 2024 – Present
+                                                    </h3>
+                                                    <h4 class="timeline-title">Freelance Web Developer</h4>
+                                                    <p class="timeline-text">
+                                                        Building real client projects using skills from Web Programming, Database, and OOP courses<br> • School Management System (PHP + MySQL)<br> • Online Shopping Website for local business<br> • Personal
+                                                        portfolios <br> Technologies: HTML, CSS, JavaScript, PHP, MySQL
+                                                    </p>
+                                                </div>
+                                                <!-- Lab Assistant / Practical Work -->
+                                                <div class="timeline-item">
+                                                    <div class="circle-dot"></div>
+                                                    <h3 class="timeline-date">
+                                                        <i class="fa fa-calendar"></i> 2025
+                                                    </h3>
+                                                    <h4 class="timeline-title">Programming Lab Assistant (Volunteer)</h4>
+                                                    <p class="timeline-text">
+                                                        Helping Year I & II students in C++, Java, and Advanced Database labs at Wachemo University<br> Explaining concepts from Data Structures, OOP, and Database courses<br> Creating practice exercises
+                                                        and debugging student code
+                                                    </p>
+                                                </div>
+                                                <!-- Group & Individual Projects (Year 2 + Year 3) -->
+                                                <div class="timeline-item">
+                                                    <div class="circle-dot"></div>
+                                                    <h3 class="timeline-date">
+                                                        <i class="fa fa-calendar"></i> 2024 – 2025
+                                                    </h3>
+                                                    <h4 class="timeline-title">Academic & Team Projects</h4>
+                                                    <p class="timeline-text">
+                                                        • Student Result Management System (html, css, js and php)<br> • Library Management System using html, css, js, and php<br> • Responsive PersonalWebsite (Web Programming)
+                                                    </p>
+                                                </div>
+                                                <!-- University Club Leadership -->
+                                                <div class="timeline-item">
+                                                    <div class="circle-dot"></div>
+                                                    <h3 class="timeline-date">
+                                                        <i class="fa fa-calendar"></i> 2024 – Present
+                                                    </h3>
+                                                    <h4 class="timeline-title">Member → Executive – Wachemo University CS Club</h4>
+                                                    <p class="timeline-text">
+                                                        Organized coding competitions and tech talks<br> Created official club website using HTML, CSS, JS<br> Teaching basic programming to My Class students every Saturday
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ===== About Section End ===== -->
+
+            <!-- ===== Service Section Start ===== -->
+            <section class="service section" id="service">
+                <div class="Container">
+                    <div class="row">
+                        <div class="section-title padd-15">
+                            <h2>Service</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Service Item 1 -->
+                        <div class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-mobile-alt"></i>
+                                </div>
+                                <h4>Web Design</h4>
+                                <p>I design modern, responsive, and user-friendly websites with clean UI/UX using the latest design trends and tools like Figma and Adobe XD.</p>
+                            </div>
+                        </div>
+                        <!-- Service Item 2 -->
+                        <div class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-laptop-code"></i>
+                                </div>
+                                <h4>Web Programming</h4>
+                                <p>I develop fast, secure, and scalable web applications using HTML, CSS, JavaScript, PHP, Python, and modern frameworks.</p>
+                            </div>
+                        </div>
+                        <!-- Service Item 3 -->
+                        <div class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-palette"></i>
+                                </div>
+                                <h4>Computer Graphics</h4>
+                                <p>I create stunning digital artwork, logos, banners, posters, and illustrations using Photoshop, Illustrator, and CorelDRAW.</p>
+                            </div>
+                        </div>
+                        <!-- Service Item 4 -->
+                        <div class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-code"></i>
+                                </div>
+                                <h4>Compiler Design</h4>
+                                <p>I build lexical analyzers, parsers, syntax-directed translators, and full compilers using tools like Flex, Bison, and LLVM.</p>
+                            </div>
+                        </div>
+                        <!-- Service Item 5 -->
+                        <div class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                <h4>Wireless Communication</h4>
+                                <p>I design and simulate wireless networks, study signal propagation, modulation techniques, and protocols like Wi-Fi, 5G, and Bluetooth.</p>
+                            </div>
+                        </div>
+                        <!-- Service Item 6 -->
+                        <div class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-database"></i>
+                                </div>
+                                <h4>Database Management</h4>
+                                <p>I design, implement, and optimize relational databases using MySQL, PostgreSQL, and MongoDB with strong knowledge of SQL and NoSQL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ===== Service Section End ===== -->
+
+            <!-- ===== Portfolio Section Start ===== -->
+            <section class="portfolio section" id="portfolio">
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title padd-15">
+                            <h2>Portfolio</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="portfolio-heading padd-15">
+                            <h2>My Latest Projects:</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="portfolio-item padd-15">
+                            <div class="portfolio-item-inner shadow-dark">
+                                <div class="portfolio-img">
+                                    <img src="images/portfolio/portfolio-1.png" alt="Project 1" onerror="this.src='https://via.placeholder.com/300x200/ec1839/ffffff?text=Project+1'" style="width: 100%; height: 250px; object-fit: cover; display: block;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item padd-15">
+                            <div class="portfolio-item-inner shadow-dark">
+                                <div class="portfolio-img">
+                                    <img src="images/portfolio/portfolio-2.png" alt="Project 2" onerror="this.src='https://via.placeholder.com/300x200/ec1839/ffffff?text=Project+2'" style="width: 100%; height: 250px; object-fit: cover; display: block;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item padd-15">
+                            <div class="portfolio-item-inner shadow-dark">
+                                <div class="portfolio-img">
+                                    <img src="images/portfolio/portfolio-3.png" alt="Project 3" onerror="this.src='https://via.placeholder.com/300x200/ec1839/ffffff?text=Project+3'" style="width: 100%; height: 250px; object-fit: cover; display: block;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item padd-15">
+                            <div class="portfolio-item-inner shadow-dark">
+                                <div class="portfolio-img">
+                                    <img src="images/portfolio/portfolio-4.png" alt="Project 4" onerror="this.src='https://via.placeholder.com/300x200/ec1839/ffffff?text=Project+4'" style="width: 100%; height: 250px; object-fit: cover; display: block;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item padd-15">
+                            <div class="portfolio-item-inner shadow-dark">
+                                <div class="portfolio-img">
+                                    <img src="images/portfolio/portfolio-5.png" alt="Project 5" onerror="this.src='https://via.placeholder.com/300x200/ec1839/ffffff?text=Project+5'" style="width: 100%; height: 250px; object-fit: cover; display: block;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item padd-15">
+                            <div class="portfolio-item-inner shadow-dark">
+                                <div class="portfolio-img">
+                                    <img src="images/portfolio/portfolio-6.png" alt="Project 6" onerror="this.src='https://via.placeholder.com/300x200/ec1839/ffffff?text=Project+6'" style="width: 100%; height: 250px; object-fit: cover; display: block;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ===== Portfolio Section End ===== -->
+
+            <!-- ===== Contact Section Start ===== -->
+            <section class="contact section" id="contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title padd-15">
+                            <h2>Contact Me!!</h2>
+                        </div>
+                    </div>
+                    <h3 class="contact-title padd-15">Have Any Question?</h3>
+                    <h4 class="contact-sub-title padd-15">I'M Reply Response Very Fast!!</h4>
+
+                    <!-- Contact Info -->
+                    <div class="row contact-info" style="margin: 40px 0; justify-content: center; flex-wrap: wrap;">
+                        <!-- Call Us -->
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fa fa-phone"></i></div>
+                            <h4>Call Us</h4>
+                            <p><a href="tel:+251954053224" style="color:inherit;">+251 954 053 224</a></p>
+                        </div>
+                        <!-- Location -->
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+                            <h4>Location</h4>
+                            <p>Ethiopia</p>
+                        </div>
+                        <!-- Email -->
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fa fa-envelope"></i></div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:degefudawit375@gmail.com" style="color:inherit;">degefudawit375@gmail.com</a></p>
+                        </div>
+                        <!-- Telegram -->
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fa fa-paper-plane"></i></div>
+                            <h4>Telegram</h4>
+                            <p><a href="https://t.me/dege54053224" target="_blank" style="color:inherit;">@dege54053224</a></p>
+                        </div>
+                        <!-- Facebook -->
+                        <div class="contact-info-item padd-15">
+                            <div class="icon"><i class="fab fa-facebook-f"></i></div>
+                            <h4>Facebook</h4>
+                            <p><a href="https://www.facebook.com/danvsdave" target="_blank" style="color:inherit;">dan vs dave</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="success-message" style="display:none; text-align:center; padding:30px 20px; background:linear-gradient(135deg,#d4edda,#a8e6cf); border-radius:20px; margin:40px 0; box-shadow:0 15px 35px rgba(40,167,69,0.3); border:2px solid var(--skin-color);">
+                        <h2 style="color:#155724; font-size:24px;">Successfully Sent!</h2>
+                        <p style="font-size:18px; color:#155724; margin:20px 0;">Thank you so much!<br>I received your message at degefudawit700@gmail.com</p>
+                        <p style="color:#155724; font-size:16px;">Form will return in <span id="countdown">4</span> seconds...</p>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <form id="contactForm" action="https://formsubmit.co/degefudawit700@gmail.com" method="POST">
+                        <div class="row">
+                            <div class="form-item col-6 padd-15">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-item col-6 padd-15">
+                                <input type="email" name="_replyto" class="form-control" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <textarea name="message" class="form-control" placeholder="Your Message..." style="height:150px;" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <button type="submit" class="btn" id="submitBtn">Send Message</button>
+                            </div>
+                        </div>
+                        <!-- FormSubmit Hidden Fields -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="_honey" style="display:none">
+                    </form>
+                </div>
+            </section>
+            <!-- ===== Contact Section End ===== -->
+        </div>
+        <!-- ===== Main Content End ===== -->
+    </div>
+
+    <!-- ===== Back to Top Button ===== -->
+    <a href="#home" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- ===== Style Switcher ===== -->
+    <div class="style-switcher">
+        <div class="style-switcher-toggler s-icon">
+            <i class="fas fa-cog fa-spin"></i>
+        </div>
+        <div class="day-night s-icon">
+            <i class="fas "></i>
+        </div>
+        <h4>Theme Color</h4>
+        <div class="color">
+            <span class="color-1" onclick="setActiveStyle('color-1')"></span>
+            <span class="color-2" onclick="setActiveStyle('color-2')"></span>
+            <span class="color-3" onclick="setActiveStyle('color-3')"></span>
+            <span class="color-4" onclick="setActiveStyle('color-4')"></span>
+            <span class="color-5" onclick="setActiveStyle('color-5')"></span>
+        </div>
+    </div>
+
+    <!-- ===== JS files ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script>
+    <script src="js/script.js"></script>
+    <script src="js/style-switcher.js"></script>
+
+    <!-- ===== FIXED Mobile Menu Script ===== -->
+    <script>
+        // Mobile menu functionality - WORKING SOLUTION
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggler = document.getElementById('navToggler');
+            const aside = document.querySelector('.aside');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const navLinks = document.querySelectorAll('.nav a');
+            const backToTop = document.getElementById('backToTop');
+
+            // Function to close menu
+            function closeMenu() {
+                aside.classList.remove('active');
+                navToggler.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+
+            // Function to open menu
+            function openMenu() {
+                aside.classList.add('active');
+                navToggler.classList.add('active');
+                menuOverlay.classList.add('active');
+                document.body.classList.add('menu-open');
+            }
+
+            // Toggle hamburger menu
+            if (navToggler) {
+                navToggler.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (aside.classList.contains('active')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+            }
+
+            // Close menu when clicking overlay
+            if (menuOverlay) {
+                menuOverlay.addEventListener('click', function() {
+                    closeMenu();
+                });
+            }
+
+            // Handle ALL navigation links
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default anchor behavior
+
+                    // Close the menu FIRST - THIS IS CRITICAL
+                    closeMenu();
+
+                    // Get the target section
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    // Remove active class from all links
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    // Add active class to clicked link
+                    this.classList.add('active');
+
+                    // Scroll to section after a small delay
+                    setTimeout(function() {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const offset = window.innerWidth <= 1199 ? 80 : 0;
+                            window.scrollTo({
+                                top: targetElement.offsetTop - offset,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 300); // 300ms delay to ensure menu is closed
+                });
+            });
+
+            // Back to top button
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+
+            // Back to top click
+            if (backToTop) {
+                backToTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    // Update active link to Home
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    document.querySelector('a[href="#home"]').classList.add('active');
+                });
+            }
+
+            // Close menu when resizing to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 1199) {
+                    closeMenu();
+                }
+            });
+
+            // Initialize typing animation
+
+        });
+
+        // Form submission script (keep your existing)
+        const form = document.getElementById("contactForm");
+        const success = document.getElementById("success-message");
+        const btn = document.getElementById("submitBtn");
+        const originalText = btn.innerHTML;
+
+        if (form) {
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                btn.innerHTML = "Sending...";
+                btn.disabled = true;
+
+                if (form.querySelector('[name="_honey"]').value !== '') {
+                    alert("Bot detected! Email me directly: degefudawit700@gmail.com");
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    return;
+                }
+
+                fetch(form.action, {
+                        method: "POST",
+                        body: new FormData(form)
+                    })
+                    .then(response => {
+                        if (response.status >= 200 && response.status < 400) {
+                            console.log("Email sent successfully!");
+                        } else {
+                            console.error("Send failed");
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Send error:", err);
+                    });
+
+                setTimeout(() => {
+                    form.style.display = "none";
+                    success.style.display = "block";
+
+                    let time = 4;
+                    const countdown = document.getElementById("countdown");
+                    const timer = setInterval(() => {
+                        time--;
+                        countdown.textContent = time;
+                        if (time <= 0) {
+                            clearInterval(timer);
+                            success.style.display = "none";
+                            form.style.display = "block";
+                            form.reset();
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                        }
+                    }, 1000);
+                }, 2000);
+            });
+        }
+        // Emergency fix for mobile menu
+        document.addEventListener('click', function(e) {
+            const navToggler = document.getElementById('navToggler');
+            const aside = document.querySelector('.aside');
+            const menuOverlay = document.getElementById('menuOverlay');
+
+            // If clicking a nav link, close menu
+            if (e.target.closest('.nav a')) {
+                aside.classList.remove('active');
+                navToggler.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+        });
+    </script>
+
+    <!-- ===== Footer ===== -->
+    <footer style="background:#111; color:#fff; text-align:center; padding:30px 0;">
+        <div style="max-width:1200px; margin:0 auto;">
+            <p style="margin-bottom:15px;">&copy; 2025 Degefu Dawit. All Rights Reserved.</p>
+            <div>
+                <a href="https://t.me/dege54053224" target="_blank" style="color:#fff; margin:0 10px; font-size:20px; text-decoration:none;">
+                    <i class="fab fa-telegram-plane"></i>
+                </a>
+                <a href="https://facebook.com/danvsdave" target="_blank" style="color:#fff; margin:0 10px; font-size:20px; text-decoration:none;">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="mailto:degefudawit700@gmail.com" style="color:#fff; margin:0 10px; font-size:20px; text-decoration:none;">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="tel:+251954053224" style="color:#fff; margin:0 10px; font-size:20px; text-decoration:none;">
+                    <i class="fas fa-phone-alt"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
